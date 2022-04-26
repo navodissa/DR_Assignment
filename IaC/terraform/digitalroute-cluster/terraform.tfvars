@@ -1,15 +1,15 @@
 aws_region = "us-east-1"
 private_subnet_ids = [
-  "subnet-00e068b687fd478a3",
-  "subnet-05fce183734e1e800",
-  "subnet-0b55b3b04b188a48e",
+  "subnet-083879cff50416edb",
+  "subnet-0fd3dc47dd9010b42",
+  "subnet-02d8a1cd6fcc2b69a",
 ]
 public_subnet_ids = [
-  "subnet-02704633c279a0690",
-  "subnet-0b35833b8f9a3fb8a",
-  "subnet-03bef21076911c57b",
+  "subnet-0150e2a0cb764052e",
+  "subnet-035cc405f68a3a9ad",
+  "subnet-016f735f848ba7199",
 ]
-vpc_id                = "vpc-06e6e90fa592d69bf"
+vpc_id                = "vpc-0a22b8a7f08a334e4"
 clusters_name_prefix  = "digitalroutecluster"
 cluster_version       = "1.21"
 workers_instance_type = "t3.medium"

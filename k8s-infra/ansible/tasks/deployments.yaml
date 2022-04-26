@@ -1,0 +1,22 @@
+- name: Create a k8s namespace
+  kubernetes.core.k8s:
+    name: testing
+    api_version: v1
+    kind: Namespace
+    state: present
+
+- name: create deployments
+  kubernetes.core.k8s:
+  #   definition: "{{ item }}"
+  #   kubeconfig: "{{ k8s_kubeconfig }}"
+  #   state: "{{ k8s_manifests_state }}"
+  #   force: "{{ k8s_force }}"
+  # loop: "{{ lookup('template', k8s_manifests_base_dir + 'deployments/deployments.yaml') | yaml_all | list }}"
+  # register: k8s_result
+  # until: k8s_result is success
+  # retries: 3
+  # delay: 2
+  # no_log: "{{ k8s_no_log }}"
+
+    state: present
+    src: ~/job_projects/digital_route/task_2/k8s-infra/ansible/templates/deployments/deployments.yaml

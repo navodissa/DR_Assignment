@@ -1,0 +1,7 @@
+deployments_list:
+- name: nginx-deployment
+  label: nginx
+  replicas: 3
+  container_name: nginx
+  image: nginx:1.14.2
+  container_port: 80

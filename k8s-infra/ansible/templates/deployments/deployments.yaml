@@ -1,0 +1,50 @@
+# {% for deployment in deployments_list %}
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: {{ deployment.name }}
+#   labels:
+#     app: {{ deployment.label }}
+# spec:
+#   replicas: {{ deployment.replicas }}
+#   selector:
+#     matchLabels:
+#       app: {{ deployment.label }}
+#   template:
+#     metadata:
+#       labels:
+#         app: {{ deployment.label }}
+#     spec:
+#       containers:
+#       - name: {{ deployment.container_name }}
+#         image: {{ deployment.image }}
+#         ports:
+#         - containerPort: {{ deployment.container_port }}
+
+# {% endfor %}
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+  namespace: testing
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
