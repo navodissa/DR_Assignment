@@ -4,4 +4,4 @@ deployments_list:
   replicas: 3
   container_name: nginx
   image: nginx:1.14.2
-  container_port: 80
+  container_port: 8080
