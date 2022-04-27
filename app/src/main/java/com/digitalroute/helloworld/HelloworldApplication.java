@@ -14,6 +14,11 @@ public class HelloworldApplication {
 		return "Hello World";
 	}
 
+	@RequestMapping("/actuator/health")
+	public String health() {
+		return "ok";
+	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(HelloworldApplication.class, args);
 	}
