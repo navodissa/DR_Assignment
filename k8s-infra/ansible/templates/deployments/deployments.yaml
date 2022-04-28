@@ -45,8 +45,7 @@ spec:
     spec:
       containers:
       - name: hello
-        image: digitalroute-helloworld
-        imagePullpolicy: Never
+        image: navoda/digitalroute-helloworld
         ports:
         - containerPort: 8080
 
