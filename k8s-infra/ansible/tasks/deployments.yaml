@@ -22,4 +22,4 @@
   kubernetes.core.k8s: 
     state: present
     # definition: "{{ lookup('file','/templates/deployments/deployments.yaml') | from_yaml }}"
-    src: DR_Assignment/k8s-infra/ansible/templates/deployments/deployments.yaml
+    src: k8s-infra/ansible/templates/deployments/deployments.yaml
