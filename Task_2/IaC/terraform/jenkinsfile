@@ -40,5 +40,12 @@ pipeline {
                 sh 'cd DR_Assignment/Task_2/IaC/terraform/digitalroute-cluster && terraform apply plan -auto-approve'
             }
         }
+
+        stage('Configuring Context') {
+            steps {
+                sh 'aws eks --region $(terraform output aws_region) update-kubeconfig --name $(terraform output cluster_full_name)'
+                sh 'terraform output authconfig | kubectl -n kube-system create -f –'
+            }
+        }
     }
 }

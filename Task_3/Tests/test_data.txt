@@ -1,0 +1,13 @@
+2022-4-1 13:33:47 [123] User1 types in search box
+2022-4-1 13:33:47 [123] User1 types in search box2
+2022-4-1 13:33:47 [123] User1 types in search box3
+2022-4-1 13:33:54 [123] ERROR: some exception occured
+ ----- 
+2022-4-1 13:33:48 [256] User2 logs in
+2022-4-1 13:33:56 [256] User2 logs off
+2022-4-1 13:33:58 [256] ERROR: some exception occured
+ ----- 
+2022-4-1 13:32:40 [190] User3 logs in
+2022-4-1 13:34:02 [190] User3 does something
+2022-4-1 13:34:03 [190] ERROR: Invalid input
+ ----- 
