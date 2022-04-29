@@ -3,7 +3,7 @@ This application is deployed in a Kubernetes Cluster. Following are the componen
     - AWS EKS for Kubernetes Control Plane
     - Self-managed AWS EC2 instances as Worker Nodes
 
-# Pre-requisites:
+## Pre-requisites:
     
 You need to have the following tools installed in your build server.
     
