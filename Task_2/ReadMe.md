@@ -3,7 +3,7 @@ This application is deployed in a Kubernetes Cluster. Following are the componen
     - AWS EKS for Kubernetes Control Plane
     - Self-managed AWS EC2 instances as Worker Nodes
 
-Pre-requisites -
+# Pre-requisites:
     
 You need to have the following tools installed in your build server.
     
@@ -13,7 +13,7 @@ You need to have the following tools installed in your build server.
         - Kubectl 1.22
         - Docker >=20.10.6
 
-Provisioning Infrastructure
+## Provisioning Infrastructure
 
 In order to deploy the application, initially, we have to provision the infrastructure.
 Infrastructure code is written as modules. So these modules can be reused only by changing the parameter values.
@@ -21,7 +21,7 @@ Inside IaC directory, you can see modules directory, where all the custom module
 
 You can use the available Jenkins file(IaC/jenkinsfile) as a pipeline and provision the Cluster.
 
-Provisioning Cluster Objects
+## Provisioning Cluster Objects
 
 I have used Ansible to provision Kubernetes objects. We can use Jinja2 templates to dynamically create Kubernetes manifest files given only necessary parameters.
 
