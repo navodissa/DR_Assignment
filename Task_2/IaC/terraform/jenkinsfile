@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+    
+    tools {
+        terraform 'Terraform'
+    }
+    
+    environment {
+        AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
+        AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
+    }
+
+    stages {
+        stage('Cloning Git') {
+            steps {
+                git 'https://github.com/navodissa/DR_Assignment.git'
+            }
+        }
+        
+        stage('Build S3 buckets'){
+            steps {
+                sh 'cd DR_Assignment/Task_2/IaC/terraform/shared-state && terraform init'
+                sh 'cd DR_Assignment/Task_2/IaC/terraform/shared-state && terraform plan --out plan'
+                sh 'cd DR_Assignment/Task_2/IaC/terraform/shared-state && terraform apply plan -auto-approve'
+            }
+        }
+        
+        stage('Build VPC'){
+            steps {
+                sh 'cd DR_Assignment/Task_2/IaC/terraform/digitalroute-vpc && terraform init'
+                sh 'cd DR_Assignment/Task_2/IaC/terraform/digitalroute-vpc && terraform plan --out plan'
+                sh 'cd DR_Assignment/Task_2/IaC/terraform/digitalroute-vpc && terraform apply plan -auto-approve'
+            }
+        }
+        
+        stage('Build EKS cluster'){
+            steps {
+                sh 'cd DR_Assignment/Task_2/IaC/terraform/digitalroute-cluster && terraform init'
+                sh 'cd DR_Assignment/Task_2/IaC/terraform/digitalroute-cluster && terraform plan --out plan'
+                sh 'cd DR_Assignment/Task_2/IaC/terraform/digitalroute-cluster && terraform apply plan -auto-approve'
+            }
+        }
+    }
+}

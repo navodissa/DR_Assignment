@@ -1,4 +1,4 @@
 - name: create services
   kubernetes.core.k8s: 
     state: present
-    src: k8s-infra/ansible/templates/services/services.yaml
+    src: Task_2/k8s-infra/ansible/templates/services/services.yaml
