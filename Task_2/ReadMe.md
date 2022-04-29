@@ -1,9 +1,12 @@
 This application is deployed in a Kubernetes Cluster. Following are the components used.
+
     - AWS EKS for Kubernetes Control Plane
     - Self-managed AWS EC2 instances as Worker Nodes
 
 Pre-requisites -
-    You need to have the following tools installed in your build server.
+    
+You need to have the following tools installed in your build server.
+    
         - Terraform >= 1.0.10
         - Ansible 2.9
         - Jenkins >= 2.332.2
