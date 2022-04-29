@@ -43,9 +43,46 @@ spec:
       labels:
         app: hello
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: workload
+                  operator: In
+                  values:
+                  - production
       containers:
       - name: hello
         image: navoda/digitalroute-helloworld
         ports:
-        - containerPort: 8080
-
+        - name: liveness-port
+          containerPort: 8080
+          hostPort: 8080
+        volumeMounts:
+        - mountPath: /tmp
+          name: site-data
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          capabilities:
+            drop:
+              - all
+        livenessProbe:
+          initialDelaySeconds: 30
+          periodSeconds: 2
+          failureThreshold: 3
+          httpGet:
+            path: /actuator/health
+            port: liveness-port
+        startupProbe:
+          httpGet:
+            path: /actuator/health
+            port: liveness-port
+          failureThreshold: 30
+          periodSeconds: 10
+      volumes:
+      - name: site-data
+        persistentVolumeClaim:
+          claimName: pvclaim-1

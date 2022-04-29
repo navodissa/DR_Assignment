@@ -1,10 +1,3 @@
-- name: Create a k8s namespace
-  kubernetes.core.k8s:
-    name: digitalroute
-    api_version: v1
-    kind: Namespace
-    state: present
-
 # - name: create deployments
 #   kubernetes.core.k8s:
 #     definition: "{{ item }}"
@@ -22,4 +15,4 @@
   kubernetes.core.k8s: 
     state: present
     # definition: "{{ lookup('file','/templates/deployments/deployments.yaml') | from_yaml }}"
-    src: ~/job_projects/digital_route/task_2/k8s-infra/ansible/templates/deployments/deployments.yaml
+    src: k8s-infra/ansible/templates/deployments/deployments.yaml

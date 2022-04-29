@@ -1,0 +1,4 @@
+pdm_list:
+- name: helloworld-pdb
+  minAvailable: 5
+  app: hello

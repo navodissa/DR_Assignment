@@ -1,7 +1,7 @@
 deployments_list:
-- name: nginx-deployment
-  label: nginx
-  replicas: 3
-  container_name: nginx
-  image: nginx:1.14.2
+- name: hello-deployment
+  label: hello
+  replicas: 6
+  container_name: hello
+  image: navoda/digitalroute-helloworld
   container_port: 8080

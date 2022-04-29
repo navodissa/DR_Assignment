@@ -1,0 +1,9 @@
+- name: create PV
+  kubernetes.core.k8s: 
+    state: present
+    src: k8s-infra/ansible/templates/volumes/pv.yaml
+
+- name: create PVC
+  kubernetes.core.k8s: 
+    state: present
+    src: k8s-infra/ansible/templates/volumes/pvc.yaml

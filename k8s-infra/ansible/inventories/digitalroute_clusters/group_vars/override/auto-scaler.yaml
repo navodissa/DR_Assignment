@@ -1,0 +1,8 @@
+auto_scaler_list:
+- name: helloworld-autoscale 
+  kind: Deployment
+  namespace: digitalroute
+  targetName: hello-deployment
+  minReplica: 6
+  maxReplica: 8
+  targetCPUUtilizationPercentage: 50

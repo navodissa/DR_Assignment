@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: digitalroute-hello-service
+  namespace: digitalroute
+  labels:
+    app: hello
+spec:
+  type: ClusterIP
+  selector:
+    app: hello
+  ports:
+  - port: 8080
+    targetPort: 8081
+    protocol: TCP

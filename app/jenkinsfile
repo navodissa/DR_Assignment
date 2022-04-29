@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Cloning Git') {
+            steps {
+                git 'https://github.com/navodissa/DR_Assignment.git'
+            }
+        }
+        
+        stage('Build the image'){
+            steps {
+                sh 'cd app && ./mvnw clean package && docker build -t digitalroute-helloworld .'
+            }
+        }
+
+        stage('Push the image to Dockerhub'){
+            steps {
+                sh 'docker tag digitalroute-helloworld:latest navoda/digitalroute-helloworld:latest'
+                sh 'docker push navoda/digitalroute-helloworld:latest'
+            }
+        }       
+        
+        
+        stage('Execute Ansible playbooks'){
+            steps {
+                sh 'ansible-playbook -i k8s-infra/ansible/inventories/digitalroute_clusters/ -e "worker_iam_role_arn=arn:aws:iam::251566712976:role/digitalroutecluster-prod1-workers" k8s-infra/ansible/cluster.yaml -vvv'
+            }
+            
+        }
+    }
+}

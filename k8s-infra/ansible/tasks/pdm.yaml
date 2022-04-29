@@ -1,0 +1,4 @@
+- name: create a Pod Disruption Budget
+  kubernetes.core.k8s: 
+    state: present
+    src: k8s-infra/ansible/templates/pdm/pdm.yaml
