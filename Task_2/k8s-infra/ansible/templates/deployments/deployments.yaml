@@ -69,6 +69,11 @@ spec:
           capabilities:
             drop:
               - all
+        readinessProbe:
+          tcpSocket:
+            port: liveness-port
+          initialDelaySeconds: 5
+          periodSeconds: 10
         livenessProbe:
           initialDelaySeconds: 30
           periodSeconds: 2
