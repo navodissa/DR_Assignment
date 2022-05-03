@@ -58,6 +58,49 @@ resource "aws_route_table_association" "eks_public_rt_association" {
   subnet_id      = element(aws_subnet.eks_public_subnets.*.id, count.index)
 }
 
+resource "aws_subnet" "eks_private_subnets" {
+  count             = length(var.eks_private_subnets_prefix_list)
+  cidr_block        = element(var.eks_private_subnets_prefix_list, count.index)
+  vpc_id            = aws_vpc.eks_vpc.id
+  availability_zone = data.aws_availability_zones.availability_zones.names[count.index]
+
+  tags = merge(
+    var.common_tags,
+    {
+      "Name" = "eks-private-${var.clusters_name_prefix}-${data.aws_availability_zones.availability_zones.names[count.index]}"
+    },
+  )
+
+  lifecycle {
+    ignore_changes = [
+      tags
+    ]
+  }
+}
+
+resource "aws_route_table" "eks_private_route_table" {
+  count  = length(var.eks_private_subnets_prefix_list)
+  vpc_id = aws_vpc.eks_vpc.id
+}
+
+resource "aws_route" "eks_private_route" {
+  count                  = length(var.eks_private_subnets_prefix_list)
+  route_table_id         = element(aws_route_table.eks_private_route_tables.*.id, count.index)
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id         = element(aws_nat_gateway.eks_nat_gws.*.id, count.index)
+  timeouts {
+    create = "5m"
+  }
+}
+
+resource "aws_route_table_association" "eks_private_rt_association" {
+  count          = length(var.eks_private_subnets_prefix_list)
+  route_table_id = element(aws_route_table.eks_private_route_tables.*.id, count.index)
+  subnet_id      = element(aws_subnet.eks_private_subnets.*.id, count.index)
+}
+
+
+
 resource "aws_internet_gateway" "eks_igw" {
   vpc_id = aws_vpc.eks_vpc.id
 }
